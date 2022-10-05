@@ -2,6 +2,7 @@ import React from "react";
 
 function Portfolio() {
     return(
+
         <section className="portfolio" id='portfolio'>
             <h2 className='portfolio__header'>Портфолио</h2>
             <ul className="portfolio__items">
@@ -14,6 +15,7 @@ function Portfolio() {
                         Статичный сайт
                     </a>
                 </li>
+
                 <li className="portfolio__item">
                     <a
                         className="portfolio__item-link"
@@ -23,6 +25,7 @@ function Portfolio() {
                         Адаптивный сайт
                     </a>
                 </li>
+
                 <li className="portfolio__item">
                     <a
                         className="portfolio__item-link"
@@ -34,6 +37,7 @@ function Portfolio() {
                 </li>
             </ul>
         </section>
+
     );
 }
 

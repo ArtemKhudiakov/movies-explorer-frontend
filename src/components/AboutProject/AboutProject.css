@@ -38,7 +38,6 @@
     letter-spacing: -0.04em;
     text-align: left;
     margin: 0;
-    margin-bottom: 26px;
     padding: 0;
     color: #ffffff;
 }
@@ -84,11 +83,11 @@
 }
 
 .about-project__text_size-1 {
-    width: 18%;
+    width: 20%;
     background: #3DDC84;
 }
 .about-project__text_size-2 {
-    width: 82%;
+    width: 80%;
     background: #303030;
 }
 .about-project__tasks {
@@ -115,22 +114,33 @@
     text-align: center;
     margin: auto;
     margin-top: 14px;
+    margin-left: 14px;
     padding: 0;
     color: #8B8B8B;
 }
 
-@media screen and (max-width: 1279px) {
+@media (min-width: 768px) and (max-width: 1279px) {
     .about-project {
         padding: 90px 50px;
     }
     .about-project__items-subtitle {
         font-size: 12px;
         line-height: 18px;
+        margin-bottom: 91px;
     }
-
 }
 
-@media screen and (max-width: 767px) {
+
+
+@media (min-width: 320px) and (max-width: 767px) {
+
+    .about-project__header {
+        font-size: 18px;
+        line-height: 22px;
+        padding-bottom: 28px;
+        margin-bottom: 60px;
+    }
+
     .about-project {
         padding: 70px 18px;
     }
@@ -145,7 +155,6 @@
         font-size: 11px;
         line-height: 16px;
         margin-bottom: 56px;
-
     }
 
     .about-project__items {
@@ -168,6 +177,17 @@
     .about-project__task {
         font-size: 11px;
         line-height: 13px;
+        margin-left: 21px;
+        margin-top: 8px;
+    }
+
+    .about-project__text_size-1 {
+        width: 43%;
+    }
+
+    .about-project__task_size_1 {
+        width: 25%;
+
     }
 }
 

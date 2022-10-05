@@ -2,9 +2,11 @@ import React from "react";
 
 function Techs() {
     return(
+
         <section className="techs" id='techs'>
             <h2 className='techs__header'>Технологии</h2>
             <div className="techs__content">
+
                 <h3 className="techs__content-title">7 технологий</h3>
                 <p className="techs__content-subtitle">
                     На курсе веб-разработки мы освоили технологии, которые применили в дипломном проекте.
@@ -18,7 +20,9 @@ function Techs() {
                     <li className="techs__item">Express.js</li>
                     <li className="techs__item">mongoDB</li>
                 </ul>
+
             </div>
+
         </section>
     );
 }
