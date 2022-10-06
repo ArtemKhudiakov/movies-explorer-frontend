@@ -1,7 +1,7 @@
 .form {
     display: flex;
     flex-direction: column;
-    width: 396px;
+    max-width: 396px;
     height: 100vh;
     margin: 0 auto;
 }
@@ -110,14 +110,29 @@
 
 @media screen and (max-width: 425px) {
 
+    .form {
+        display: flex;
+        flex-direction: column;
+        margin: 0 30px;
+    }
+
+
     .form__title-container {
         display: flex;
         flex-direction: column;
         align-items: center;
+
     }
 
     .form__title {
-        margin: 40px 0 0;
+        margin: 6px 0 80px;
+    }
+
+
+    .form__logo {
+        width: 38px;
+        height: 38px;
+        margin: 56px 0 40px;
     }
 
     .form__button {
@@ -130,5 +145,17 @@
     .form__close-text {
         font-size: 12px;
         line-height: 15px;
+    }
+
+    .form__input {
+        padding-bottom: 9px;
+    }
+
+    .form__input-container {
+        margin: 13px 0;
+    }
+
+    .register__button {
+        margin: 285px 0 16px;
     }
 }

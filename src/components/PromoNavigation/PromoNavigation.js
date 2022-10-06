@@ -4,8 +4,7 @@ import { NavLink } from 'react-router-dom';
 function PromoNavigation() {
 
     return (
-
-        <nav className="promo-links">
+        <nav className="promo__links">
             <ul className="promo__list">
                 <li className="promo__link">
                     <NavLink

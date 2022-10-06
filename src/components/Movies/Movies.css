@@ -6,3 +6,14 @@
     padding: 0;
 
 }
+@media (min-width: 768px) and (max-width: 1279px) {
+    .movies {
+        width: calc(100% - 59px);
+    }
+}
+
+@media (max-width: 320px) and (max-width: 768px) {
+    .movies {
+        width: calc(100% - 29px);
+    }
+}

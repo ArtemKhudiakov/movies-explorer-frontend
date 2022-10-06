@@ -9,7 +9,7 @@ function Portfolio() {
                 <li className="portfolio__item">
                     <a
                         className="portfolio__item-link"
-                        href="https://artemkhudiakov.github.io/how-to-learn/"
+                        href="https://github.com/ArtemKhudiakov/how-to-learn"
                         target="_blank"
                         rel="noreferrer">
                         Статичный сайт

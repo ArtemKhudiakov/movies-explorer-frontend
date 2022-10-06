@@ -46,7 +46,7 @@ function App() {
             <div className="app__container">
                 {useRouteMatch(noHeader)
                     ? null
-                    : (<Header isLoggedIn={false} />)
+                    : (<Header isLoggedIn={true} />)
                 }
                 <Switch>
                     <Route

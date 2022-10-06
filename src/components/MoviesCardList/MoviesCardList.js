@@ -115,7 +115,7 @@ function MoviesCardList()
             {movieList
                 .map((item, key) => (
                     item.isSaved || (window.location.pathname === '/movies') ?
-                    <li className="movies-card-list__item" key={key}>
+                    <li className="movies-card-list__item saved-card-list__item" key={key}>
                         <MoviesCard title={item.title}
                                     duration={item.duration}
                                     image={item.image}
