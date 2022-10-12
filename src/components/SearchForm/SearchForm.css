@@ -18,7 +18,7 @@
     font-weight: 400;
     font-size: 18px;
     line-height: 20px;
-    min-width: 1140px;
+    width: 100%;
     outline: none;
     border: 1.5px solid #AAAAAA;
     border-radius: 8px;
@@ -44,3 +44,4 @@
     border-radius: 5px;
     cursor: pointer;
 }
+

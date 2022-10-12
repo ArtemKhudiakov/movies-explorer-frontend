@@ -4,6 +4,6 @@ const link_settings = {
 }
 
 
-export const BASE_URL = 'https://api.artemmovies.nomoredomains.sbs/';
+export const BASE_URL = 'https://api.artemmovies.nomoredomains.sbs';
 
 export const BASE_MOVIES_URL = 'https://api.nomoreparties.co';

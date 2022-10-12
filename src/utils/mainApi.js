@@ -6,7 +6,7 @@ export class MainApi {
         this._url = url;
     }
 
-    _checkServerResponse(res) {
+    _checkResponse(res) {
 
         return res.ok
             ? res.json()
@@ -22,12 +22,13 @@ export class MainApi {
                 'Authorization': 'Bearer ' + localStorage.getItem('jwt')
             }
         })
-            .then(this._checkServerResponse);
+            .then(this._checkResponse);
     }
 
     updateUserInfo(data) {
 
         return fetch(`${this._url}/users/me`, {
+
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -38,30 +39,33 @@ export class MainApi {
                 email: data.email
             })
         })
-            .then(this._checkServerResponse);
+            .then(this._checkResponse);
     }
 
     getSavedMovies() {
 
         return fetch(`${this._url}/movies`, {
+
             method: "GET",
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + localStorage.getItem('jwt')
             }
         })
-            .then(this._checkServerResponse);
+            .then(this._checkResponse);
     }
 
     createMovie(movie) {
 
         return fetch(`${this._url}/movies`, {
+
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + localStorage.getItem('jwt')
             },
             body: JSON.stringify({
+
                 country: movie.country,
                 director: movie.director,
                 duration: movie.duration,
@@ -75,22 +79,21 @@ export class MainApi {
                 nameEN: movie.nameEN
             })
         })
-            .then(this._checkServerResponse);
+            .then(this._checkResponse);
     }
 
     deleteMovie(id) {
 
         return fetch(`${this._url}/movies/${id}`, {
+
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + localStorage.getItem('jwt')
             }
         })
-            .then(this._checkServerResponse);
+            .then(this._checkResponse);
     }
-
-
 }
 
 const mainApi = new MainApi({

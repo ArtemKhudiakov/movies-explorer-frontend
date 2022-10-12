@@ -8,34 +8,20 @@ function Form({
                   inputs,
                   button,
                   text,
-                  link
+                  link,
+                  onSubmit,
+                  userData,
+                  onChange,
+                  isDisabled
               })
 {
-    const fields = inputs.map((item) => (
-
-        <div
-            key={item.key}
-            className="form__input-container">
-            <label className="form__label">
-                {item.label}
-            </label>
-            <input
-                className="form__input"
-                name={item.name}
-                type={item.type}
-                placeholder={item.placeholder}
-                required={item.required}
-            />
-            <span className={`form__input-error ${item.name}-input-error`}></span>
-        </div>
-
-    ));
 
     return (
 
         <form
             name={name}
             className={`form form-${name}`}
+            onSubmit={onSubmit}
         >
             <div className={`form__body ${name}__header`}>
                 <div className="form__title-container">
@@ -46,10 +32,66 @@ function Form({
                 </div>
             </div>
             <div className={`form__fieldset ${name}__fieldset`}>
-                { fields }
+            {/*   */}
+                {(window.location.pathname !== '/signin') && (
+                    <div
+                    key={inputs[0].key}
+                    className="form__input-container">
+                    <label className="form__label">
+                {inputs[0].label}
+                    </label>
+                    <input
+                    className="form__input"
+                    name={inputs[0].name}
+                    type={inputs[0].type}
+                    placeholder={inputs[0].placeholder}
+                    required={inputs[0].required}
+                    value={userData.name.value || ""}
+                    onChange={onChange}
+                    />
+                    <span className={`form__input-error ${inputs[0].name}-input-error`}></span>
+                    </div>
+                    )}
+
+                <div
+                    key={inputs[1].key}
+                    className="form__input-container">
+                    <label className="form__label">
+                        {inputs[1].label}
+                    </label>
+                    <input
+                        className="form__input"
+                        name={inputs[1].name}
+                        type={inputs[1].type}
+                        placeholder={inputs[1].placeholder}
+                        required={inputs[1].required}
+                        value={userData.email.value || ""}
+                        onChange={onChange}
+                    />
+                    <span className={`form__input-error ${inputs[1].name}-input-error`}></span>
+                </div>
+
+                <div
+                    key={inputs[2].key}
+                    className="form__input-container">
+                    <label className="form__label">
+                        {inputs[2].label}
+                    </label>
+                    <input
+                        className="form__input"
+                        name={inputs[2].name}
+                        type={inputs[2].type}
+                        placeholder={inputs[2].placeholder}
+                        required={inputs[2].required}
+                        value={userData.password.value || ""}
+                        onChange={onChange}
+                    />
+                    <span className={`form__input-error ${inputs[2].name}-input-error`}></span>
+                </div>
+            {/*    */}
             </div>
             <div className={`form__footer ${name}__footer`}>
-                <button className="form__button register__button" type="submit">
+                <button className="form__button register__button" type="submit"  disabled={isDisabled}>
                     {button}
                 </button>
                 <p className="form__close-text">
