@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Form from '../Form/Form';
 
+function Register() {
 const [userData, setUserData] = useState({
     name: {
         value: "",
@@ -18,7 +19,11 @@ const [userData, setUserData] = useState({
         errorMessage: ""
     }
 });
-
+const [disabled, setDisabled] = useState(false);
+const isValid =
+    userData.name.isValid &&
+    userData.email.isValid &&
+    userData.password.isValid;
 useEffect(() => {
     isValid ? setDisabled(false) : setDisabled(true);
 }, [isValid]);
@@ -33,7 +38,7 @@ const LINK = {
     path: '/signin',
 }
 
-function Register() {
+
     return (
         <article className="register">
             <Form
