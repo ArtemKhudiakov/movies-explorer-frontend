@@ -1,32 +1,32 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Form from '../Form/Form';
 
-const INPUTS = [
-    {
-        key: 1,
-        type: 'text',
-        name: 'name',
-        label: 'Имя',
-        placeholder: 'Artem',
-        required: true,
+const [userData, setUserData] = useState({
+    name: {
+        value: "",
+        isValid: false,
+        errorMessage: ""
     },
-    {
-        key: 2,
-        type: 'email',
-        name: 'email',
-        label: 'E-mail',
-        placeholder: 'example@yandex.ru',
-        required: true,
+    email: {
+        value: "",
+        isValid: false,
+        errorMessage: ""
     },
-    {
-        key: 3,
-        type: 'password',
-        name: 'password',
-        label: 'Пароль',
-        placeholder: '********',
-        require: true,
+    password: {
+        value: "",
+        isValid: false,
+        errorMessage: ""
     }
-];
+});
+
+useEffect(() => {
+    isValid ? setDisabled(false) : setDisabled(true);
+}, [isValid]);
+
+useEffect(() => {
+    isLoading ? setDisabled(true) : setDisabled(false);
+}, [isLoading]);
+
 
 const LINK = {
     title: 'Войти',
