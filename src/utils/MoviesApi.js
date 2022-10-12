@@ -24,7 +24,7 @@ class MoviesApi {
     }
 }
 
-export const moviesApi = new MoviesApi(
+const moviesApi = new MoviesApi(
     {
         baseUrl: `${BASE_MOVIES_URL}/beatfilm-movies`,
         headers: {
@@ -32,3 +32,5 @@ export const moviesApi = new MoviesApi(
         },
     }
 );
+
+export default moviesApi;

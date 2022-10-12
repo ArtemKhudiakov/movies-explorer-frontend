@@ -14,7 +14,7 @@ const INPUTS = [
         required: true,
     },
     {
-        key: 1,
+        key: 2,
         type: 'email',
         name: 'email',
         label: 'E-mail',
@@ -22,7 +22,7 @@ const INPUTS = [
         required: true,
     },
     {
-        key: 2,
+        key: 3,
         type: 'password',
         name: 'password',
         label: 'Пароль',
@@ -81,6 +81,7 @@ const [userData, setUserData] = useState({
     }
 
     const handleSubmit = (evt) => {
+
         evt.preventDefault();
         onLogin({
             email: userData.email.value,
