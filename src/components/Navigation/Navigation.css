@@ -1,0 +1,84 @@
+.nav {
+    display: flex;
+    justify-content: right;
+    width: 50%;
+}
+
+.nav__links {
+    display: flex;
+    letter-spacing: -0.5px;
+    padding: 0;
+    list-style: none;
+}
+
+.burger {
+    display: none;
+}
+
+.nav__links-item {
+    padding: 0;
+    margin-left: 20px;
+}
+
+.nav__link {
+    display: inline-block;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 18px;
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.nav__link:hover {
+    opacity: 0.8;
+}
+
+.nav__link_saved-movies {
+    font-weight: 400;
+}
+
+.nav__link_profile {
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 12px;
+    padding-right: 32px;
+    padding-left: 61px;
+    position: relative;
+}
+
+.nav__link_profile::after {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #313131;
+    border-radius: 50px;
+    content: url(../../images/user.svg);
+    position: absolute;
+    bottom: -8px;
+    right: 0;
+    width: 26px;
+    height: 30px;
+}
+
+@media (min-width: 768px) and (max-width: 1000px) {
+    .nav__links {
+        display: none;
+    }
+    .burger {
+        display: block;
+        width: 44px;
+        height: 44px;
+    }
+}
+
+@media (min-width: 320px) and (max-width: 768px) {
+
+    .nav__links {
+        display: none;
+    }
+    .burger {
+        display: block;
+        width: 40px;
+        height: 43px;
+    }
+}

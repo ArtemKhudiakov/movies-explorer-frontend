@@ -1,0 +1,49 @@
+.promo__list {
+    margin: 0;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    padding: 0;
+}
+
+.promo__link {
+    margin-left: 30px;
+    list-style: none;
+    padding: 0;
+}
+
+.promo__link:first-of-type {
+    margin-left: 0;
+}
+
+.promo__url {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 500;
+}
+
+.promo__url:hover {
+    opacity: 0.8;
+}
+
+.promo__url.button-link {
+    background-color: #3DDC84;
+    border-radius: 3px;
+    color: #000000;
+    padding: 8px 20px;
+}
+
+@media (min-width: 320px) and (max-width: 1279px) {
+    .promo__url.button-link {
+        padding: 7px 12px;
+    }
+    .promo__url {
+        margin-left: -16px;
+        font-weight: 500;
+        font-size: 10px;
+        line-height: 16px;
+    }
+
+}

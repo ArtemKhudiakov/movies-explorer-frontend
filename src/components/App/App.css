@@ -1,0 +1,9 @@
+.app {
+  font-family: "Inter", "Arial", "Times New Roman";
+  margin: 0 auto;
+
+}
+.app__container {
+
+  background-color: #202020;
+}
