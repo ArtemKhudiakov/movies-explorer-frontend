@@ -9,8 +9,13 @@
     color: white;
     margin: 50px auto 80px;
     border-radius: 5px;
+    cursor: pointer;
 }
-
+.button-more:hover {
+    background-color: #333B41;
+    opacity: 0.9;
+    transition: 0.7s ease-in-out;
+}
 .button__container {
     width: 100%;
     margin: 0 auto;

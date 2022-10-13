@@ -1,6 +1,7 @@
 import React from "react";
 import MoviesCard from '../MoviesCard/MoviesCard';
-import {useLocation} from "react-router-dom";
+import ButtonMore from "../ButtonMore/ButtonMore";
+import {useLocation, Route} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {
     WIDTH_320,
@@ -10,9 +11,9 @@ import {
     SEARCH_1280,
     SEARCH_768,
     SEARCH_320,
-    // ADD_1280,
-    // ADD_768,
-    // ADD_320
+    ADD_1280,
+    ADD_768,
+    ADD_320
 
 } from "../../utils/constants";
 
@@ -79,14 +80,13 @@ function MoviesCardList({foundMovies, onSaveMovie, onDeleteMovie, savedMovies})
         setMovieList(movies);
     }
 
-    // function handleAddButtonClick() {
-    //     if (deviceWidth >= WIDTH_1280) {setMaxCards(maxCards + ADD_1280);
-    //     } else if (deviceWidth >= WIDTH_768) {setMaxCards(maxCards + ADD_768);
-    //     } else if (deviceWidth >= WIDTH_320) {setMaxCards(maxCards + ADD_320);
-    //     } else {setMaxCards(maxCards + ADD_320);
-    //     }
-    // }
-
+    function handleAddButtonClick() {
+        if (deviceWidth >= WIDTH_1280) {setMaxCards(maxCards + ADD_1280);
+        } else if (deviceWidth >= WIDTH_768) {setMaxCards(maxCards + ADD_768);
+        } else if (deviceWidth >= WIDTH_320) {setMaxCards(maxCards + ADD_320);
+        } else {setMaxCards(maxCards + ADD_320);
+        }
+    }
 
     return(
 
@@ -94,7 +94,6 @@ function MoviesCardList({foundMovies, onSaveMovie, onDeleteMovie, savedMovies})
 
             {movieList
                 .map((item, key) => (
-                    // item.isSaved || (window.location.pathname === '/movies') ?
                     <li className="movies-card-list__item" key={key}>
                         <MoviesCard movie={item}
                                     key={item.id || item._id}
@@ -102,12 +101,22 @@ function MoviesCardList({foundMovies, onSaveMovie, onDeleteMovie, savedMovies})
                                     onDeleteMovie={onDeleteMovie}
                                     savedMovies={savedMovies}/>
                     </li>
-                        // : null
 
                 ))
             }
+            {foundMovies.length !== movieList.length ? (
+
+                <Route path="/movies">
+                    <ButtonMore onClick={handleAddButtonClick}/>
+                </Route>
+
+            ) : (
+
+                ""
+            )}
 
         </section>
+
     );
 }
 

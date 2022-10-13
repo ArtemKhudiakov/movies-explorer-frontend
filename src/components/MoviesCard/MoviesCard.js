@@ -1,18 +1,9 @@
 import React from "react";
-import {useState} from "react";
 import {BASE_MOVIES_URL} from "../../utils/constants";
 
 function MoviesCard({ movie, onSaveMovie, onDeleteMovie,savedMovies }) {
 
-    // const [isOwn, setIsOwn] = useState(false);
-    //
     const isSaved = savedMovies.find((item) => item.movieId === movie.id);
-
-    // const toggleIsOwn = () => {
-    //     if (isOwn) {
-    //         setIsOwn(false);
-    //     } else setIsOwn(true);
-    // };
 
     function converter (duration) {
         const hours = Math.floor(duration / 60);
@@ -33,8 +24,6 @@ function MoviesCard({ movie, onSaveMovie, onDeleteMovie,savedMovies }) {
 
         onDeleteMovie(movie);
     }
-
-
 
     return (
 

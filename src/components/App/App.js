@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react";
-
 import {
     Redirect,
     Route,
@@ -7,7 +6,6 @@ import {
     useRouteMatch,
     useHistory
 } from 'react-router-dom';
-
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
@@ -50,6 +48,7 @@ function App() {
     const [allMovies, setAllMovies] = useState([]);
     const [foundMovies, setFoundMovies] = useState([]);
     const [savedMovies, setSavedMovies] = useState([]);
+    const [savedMoviesList, setSavedMoviesList] = useState([]);
     const [infoToolTip, setInfoToolTip] = useState(false);
     const [popupText, setPopupText] = useState('');
 
@@ -88,7 +87,6 @@ function App() {
             }
         }
     }, [])
-
 
     function handleRegister({name, password, email}) {
 
@@ -218,7 +216,6 @@ function App() {
         }
     }
 
-
     function handleCheckboxMovies(checkbox) {
 
         let shortMovies;
@@ -234,18 +231,17 @@ function App() {
         localStorage.setItem("checkboxStatus", JSON.stringify(checkbox));
     }
 
-
     function handleSaveMovie(movie) {
 
         mainApi.createMovie(movie)
             .then((res) => {
                 setSavedMovies(savedMovies.concat(res));
+                setSavedMoviesList(savedMoviesList.concat(res));
             })
             .catch((err) => {
                 console.log(`Ошибка ${err}`);
             });
     }
-
 
     function handleDeleteMovie(movie) {
 
@@ -253,24 +249,24 @@ function App() {
             .then(() => {
                 const updatedMoviesList = savedMovies.filter((item) => item._id !== movie._id);
                 setSavedMovies(updatedMoviesList);
+                setSavedMoviesList(savedMoviesList.filter((item) => item._id !== movie._id));
             })
             .catch((err) => {
                 console.log(`Ошибка ${err}`);
             });
     }
-
 
     function getSavedMovies() {
         mainApi.getSavedMovies()
             .then((res) => {
                 const savedMovies = res.filter((movie) => movie.owner === currentUser._id);
                 setSavedMovies(savedMovies);
+                setSavedMoviesList(savedMovies);
             })
             .catch((err) => {
                 console.log(`Ошибка ${err}`);
             });
     }
-
 
     function handleSearchSavedMovie(req) {
         setIsPreloader(true);
@@ -287,10 +283,11 @@ function App() {
         }
     }
 
-
     function handleCheckboxSavedMovies(checkbox) {
         if (checkbox) {
             setSavedMovies(savedMovies.filter((item) => item.duration <= SHORT_MOVIE));
+        } else if (!checkbox) {
+            setSavedMovies(savedMoviesList);
         }
     }
 

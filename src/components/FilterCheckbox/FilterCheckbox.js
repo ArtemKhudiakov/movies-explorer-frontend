@@ -1,6 +1,6 @@
 import React from "react";
 
-function FilterCheckbox() {
+function FilterCheckbox({isClicked, onSubmitCheckbox}) {
 
     return (
 
@@ -9,7 +9,9 @@ function FilterCheckbox() {
                 className="checkbox__input"
                 id="shortfilm"
                 name="checkbox"
-                type="checkbox" />
+                type="checkbox"
+                checked={!isClicked}
+                onChange={onSubmitCheckbox}/>
             <span className="checkbox__check"></span>
             <span className="checkbox__title">Короткометражки</span>
         </label>

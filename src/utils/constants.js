@@ -14,3 +14,7 @@ export const FULL_CARDS = 120;
 export const SEARCH_320 = 5;
 export const SEARCH_768 = 8;
 export const SEARCH_1280 = 12;
+
+export const ADD_320 = 2;
+export const ADD_768 = 2;
+export const ADD_1280 = 3

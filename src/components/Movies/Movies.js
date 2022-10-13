@@ -1,8 +1,6 @@
 import React from "react";
-
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import ButtonMore from "../ButtonMore/ButtonMore";
 import Preloader from "../Preloader/Preloader";
 
 function Movies({onSearch, foundMovies, savedMovies, onSaveMovie, onDeleteMovie, onSubmitCheckbox, preloaderTime}) {
@@ -19,7 +17,6 @@ function Movies({onSearch, foundMovies, savedMovies, onSaveMovie, onDeleteMovie,
                                 onDeleteMovie={onDeleteMovie}
                                 savedMovies={savedMovies} />
                 )}
-            <ButtonMore />
         </div>
     );
 }

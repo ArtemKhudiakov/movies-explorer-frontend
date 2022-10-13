@@ -67,6 +67,12 @@
     margin: 19px 14px;
 }
 
+.movie__button:hover {
+    background-color: #8B8B8B;
+    opacity: 0.9;
+    transition: 0.3s ease-in-out;
+}
+
 .movie__button_saved {
     background-color: #3DDC84;
 }
@@ -74,6 +80,12 @@
 .movie__button_delete {
     background-image: url(../../images/delete_card.png);
     background-color: #313131;
+}
+
+.movie__button_delete:hover {
+    background-color: #8B8B8B;
+    opacity: 0.9;
+    transition: 0.3s ease-in-out;
 }
 
 .movie__container {

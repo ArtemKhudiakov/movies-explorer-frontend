@@ -1,10 +1,10 @@
 import React from "react";
 
-function ButtonMore() {
+function ButtonMore({onClick}) {
 
     return (
         <div className="button__container">
-            <button type="button" className="button-more">Еще</button>
+            <button type="button" className="button-more" onClick={onClick}>Еще</button>
         </div>
     )
 }
