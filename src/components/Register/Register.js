@@ -50,7 +50,7 @@ function Register( {onRegister, isLoading} ) {
             type: 'text',
             name: 'name',
             label: 'Имя',
-            placeholder: 'Artem',
+            placeholder: 'Имя',
             required: true,
         },
         {

@@ -5,11 +5,11 @@ import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 function SearchForm({onSearch, onSubmitCheckbox}) {
     const location = useLocation();
     const [clickedCheckbox, setClickedCheckbox] = useState(false);
-    const [inputValue, setInputValue] = useState("");
+    const [inputValue, setInputValue] = useState(false);
 
     const [searchError, setSearchError] = useState({
-        errorMessage: "",
-        isValid: true
+        isValid: true,
+        errorMessage: ""
     });
 
     useEffect(() => {
@@ -53,6 +53,7 @@ function SearchForm({onSearch, onSubmitCheckbox}) {
         evt.preventDefault();
 
         if (!inputValue) {
+            console.log(inputValue)
             return setSearchError({
                 isValid: false,
                 errorMessage: "Введите ключевое слово"
