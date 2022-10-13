@@ -10,6 +10,10 @@ import {
     SEARCH_1280,
     SEARCH_768,
     SEARCH_320,
+    // ADD_1280,
+    // ADD_768,
+    // ADD_320
+
 } from "../../utils/constants";
 
 function MoviesCardList({foundMovies, onSaveMovie, onDeleteMovie, savedMovies})
@@ -74,6 +78,15 @@ function MoviesCardList({foundMovies, onSaveMovie, onDeleteMovie, savedMovies})
         });
         setMovieList(movies);
     }
+
+    // function handleAddButtonClick() {
+    //     if (deviceWidth >= WIDTH_1280) {setMaxCards(maxCards + ADD_1280);
+    //     } else if (deviceWidth >= WIDTH_768) {setMaxCards(maxCards + ADD_768);
+    //     } else if (deviceWidth >= WIDTH_320) {setMaxCards(maxCards + ADD_320);
+    //     } else {setMaxCards(maxCards + ADD_320);
+    //     }
+    // }
+
 
     return(
 

@@ -5,6 +5,7 @@ export const URL_REGEX = /^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*/;
 export const SHORT_MOVIE = 40;
 
 export const WIDTH_1280 = 1280;
+export const WIDTH_1000 = 1000;
 export const WIDTH_768 = 768;
 export const WIDTH_320 = 320;
 

@@ -22,11 +22,10 @@
     outline: none;
     border: 1.5px solid #AAAAAA;
     border-radius: 8px;
-    padding: 10px;
+    padding-left: 25px;
 }
 
 ::placeholder {
-    padding-left: 25px;
     color: #8B8B8B;
 }
 

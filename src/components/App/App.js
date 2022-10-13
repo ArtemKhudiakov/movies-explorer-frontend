@@ -22,11 +22,11 @@ import moviesApi from "../../utils/MoviesApi.js";
 import mainApi from "../../utils/mainApi";
 import {SHORT_MOVIE, URL_REGEX} from "../../utils/constants";
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";
+import InfoToolTip from "../InfoToolTip/InfoToolTip";
 
 function App() {
     const history = useHistory();
     const [isLoggedIn, setIsLoggedIn] = React.useState(true);
-    const [isMenuShown, setIsMenuShown] = React.useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [currentUser, setCurrentUser] = useState({
         name: "",
@@ -49,31 +49,66 @@ function App() {
     const [isPreloader, setIsPreloader] = useState(false);
     const [allMovies, setAllMovies] = useState([]);
     const [foundMovies, setFoundMovies] = useState([]);
+    const [savedMovies, setSavedMovies] = useState([]);
+    const [infoToolTip, setInfoToolTip] = useState(false);
+    const [popupText, setPopupText] = useState('');
 
     useEffect(() => {
+
+        if (isLoggedIn && currentUser) {
+            getSavedMovies();
+        }
+    }, [isLoggedIn, currentUser]);
+
+    useEffect(() => {
+
         tokenCheck();
     }, []);
 
     useEffect(() => {
+
         if (!localStorage.getItem("jwt")) {
             handleSignOut();
         }
     }, []);
+
+    useEffect(() => {
+
+        if (localStorage.getItem("searchedMovies") && localStorage.getItem("checkboxStatus")) {
+            const checkboxStatus = JSON.parse(localStorage.getItem("checkboxStatus"));
+            handleCheckboxMovies(checkboxStatus);
+        }
+    }, []);
+
+    useEffect(() => {
+
+        if (JSON.parse(localStorage.getItem("loadedMovies"))) {
+            if (localStorage.getItem("loadedMovies")) {
+                setAllMovies(JSON.parse(localStorage.getItem("loadedMovies")));
+            }
+        }
+    }, [])
+
 
     function handleRegister({name, password, email}) {
 
         setIsLoading(true);
         auth.register({name, password, email})
             .then(() => {
+                setPopupText('Вы успешно зарегистрировались!');
+                setInfoToolTip(true);
 
                 handleLogin({password, email});
                 history.push('/movies');
             })
             .catch((err) => {
+                setPopupText('Что-то пошло не так! Попробуйте ещё раз.');
+                setInfoToolTip(true);
 
                 console.log(`Ошибка ${err}`);
             });
     }
+
     function handleLogin({password, email}) {
 
         auth.authorize({password, email})
@@ -81,14 +116,20 @@ function App() {
                 if (res.token) {
                     setIsLoggedIn(true);
                     localStorage.setItem("jwt", res.token);
+                    tokenCheck();
+                    setPopupText('Вы успешно авторизованы!');
+                    setInfoToolTip(true);
                     history.push('/movies');
                 }
             })
             .catch((err) => {
+                setPopupText('Вы ввели неверный e-mail или пароль!');
+                setInfoToolTip(true);
 
                 console.log(`Ошибка ${err}`);
             })
     }
+
     function tokenCheck() {
 
         const token = localStorage.getItem("jwt");
@@ -119,20 +160,28 @@ function App() {
         localStorage.clear();
         setIsLoggedIn(false);
         setCurrentUser({ name: "", email: "", _id: "" });
+        localStorage.removeItem("searchedMovies");
+        localStorage.removeItem("searchWord");
+        localStorage.removeItem("checkboxStatus");
         history.push("/");
     }
-// Поиск фильмов
+
     function handleSearchMovies(movie, checked) {
 
         if (allMovies.length !== 0) {
             const searchMovies = allMovies.filter((item) =>
                 item.nameRU.toLowerCase().includes(movie.toLowerCase()));
 
+            if (searchMovies.length === 0) {
+                setPopupText('По вашему запросу ничего не найдено');
+                setInfoToolTip(true);
+            } else {
                 localStorage.setItem("searchedMovies", JSON.stringify(searchMovies));
                 localStorage.setItem("searchWord", movie);
                 localStorage.setItem("checkboxStatus", JSON.stringify(checked));
 
                 setFoundMovies(searchMovies);
+            }
         } else {
             setIsPreloader(true);
 
@@ -149,19 +198,108 @@ function App() {
                     const searchMovies = findMovies.filter((item) =>
                         item.nameRU.toLowerCase().includes(movie.toLowerCase()));
 
+                    if (searchMovies.length === 0) {
+                        setPopupText('По вашему запросу ничего не найдено');
+                        setInfoToolTip(true);
+                    } else {
+
                         localStorage.setItem("loadedMovies", JSON.stringify(findMovies));
                         setAllMovies(findMovies);
                         localStorage.setItem("searchedMovies", JSON.stringify(searchMovies));
                         localStorage.setItem("searchWord", movie);
                         localStorage.setItem("checkboxStatus", JSON.stringify(checked));
-
                         setFoundMovies(searchMovies);
+                    }
                 })
                 .catch((err) => {
                     console.log(`Ошибка ${err}`);
                 })
                 .finally(() => setIsPreloader(false));
         }
+    }
+
+
+    function handleCheckboxMovies(checkbox) {
+
+        let shortMovies;
+
+        let movies = JSON.parse(localStorage.getItem("searchedMovies"));
+
+        if (checkbox) {
+            shortMovies = movies.filter((item) => item.duration <= SHORT_MOVIE);
+        } else if (!checkbox) {
+            shortMovies = movies;
+        }
+        setFoundMovies(shortMovies);
+        localStorage.setItem("checkboxStatus", JSON.stringify(checkbox));
+    }
+
+
+    function handleSaveMovie(movie) {
+
+        mainApi.createMovie(movie)
+            .then((res) => {
+                setSavedMovies(savedMovies.concat(res));
+            })
+            .catch((err) => {
+                console.log(`Ошибка ${err}`);
+            });
+    }
+
+
+    function handleDeleteMovie(movie) {
+
+        mainApi.deleteMovie(movie._id)
+            .then(() => {
+                const updatedMoviesList = savedMovies.filter((item) => item._id !== movie._id);
+                setSavedMovies(updatedMoviesList);
+            })
+            .catch((err) => {
+                console.log(`Ошибка ${err}`);
+            });
+    }
+
+
+    function getSavedMovies() {
+        mainApi.getSavedMovies()
+            .then((res) => {
+                const savedMovies = res.filter((movie) => movie.owner === currentUser._id);
+                setSavedMovies(savedMovies);
+            })
+            .catch((err) => {
+                console.log(`Ошибка ${err}`);
+            });
+    }
+
+
+    function handleSearchSavedMovie(req) {
+        setIsPreloader(true);
+        const searchMovies = savedMovies.filter((item) =>
+            item.nameRU.toLowerCase().includes(req.toLowerCase()));
+
+        if (searchMovies.length === 0) {
+            setPopupText('По вашему запросу ничего не найдено');
+            setInfoToolTip(true);
+            setIsPreloader(false);
+        } else {
+            setSavedMovies(searchMovies);
+            setIsPreloader(false);
+        }
+    }
+
+
+    function handleCheckboxSavedMovies(checkbox) {
+        if (checkbox) {
+            setSavedMovies(savedMovies.filter((item) => item.duration <= SHORT_MOVIE));
+        }
+    }
+
+    const handleInfoTooltip = () => {
+        setInfoToolTip(true)
+    }
+
+    const closeAllPopups = () => {
+        setInfoToolTip(false)
     }
 
     return (
@@ -191,13 +329,20 @@ function App() {
                     <Route path="/movies">
                         <Movies onSearch={handleSearchMovies}
                                 foundMovies={foundMovies}
+                                onSaveMovie={handleSaveMovie}
+                                onDeleteMovie={handleDeleteMovie}
+                                savedMovies={savedMovies}
+                                onSubmitCheckbox={handleCheckboxMovies}
                                 preloaderTime={isPreloader}/>
                     </Route>
-                    <Route
-                        path="/saved-movies"
-                        component={ SavedMovies }
-
-                    />
+                    <Route path="/saved-movies">
+                        <SavedMovies onSearch={handleSearchSavedMovie}
+                                     onSaveMovie={handleSaveMovie}
+                                     onDeleteMovie={handleDeleteMovie}
+                                     savedMovies={savedMovies}
+                                     onSubmitCheckbox={handleCheckboxSavedMovies}
+                                     preloaderTime={isPreloader}/>
+                    </Route>
                     <Route
                         path="/profile"
                         component={ Profile }
@@ -211,6 +356,11 @@ function App() {
                 {useRouteMatch(noFooter)
                     ? null
                     : (<Footer />)}
+                <InfoToolTip
+                    isOpen={infoToolTip}
+                    onClose={closeAllPopups}
+                    text={popupText}
+                />
             </div>
         </div>
         </CurrentUserContext.Provider>

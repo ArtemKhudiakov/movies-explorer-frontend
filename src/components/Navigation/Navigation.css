@@ -1,7 +1,6 @@
 .nav {
     display: flex;
-    justify-content: right;
-    width: 50%;
+    justify-content: flex-end;
 }
 
 .nav__links {
@@ -55,3 +54,18 @@
     width: 26px;
     height: 30px;
 }
+
+@media screen and (max-width: 1000px) {
+
+    .nav {
+        display:none;
+        height: 1px;
+        width: 1px;
+        visibility: hidden;
+    }
+
+
+
+}
+
+
