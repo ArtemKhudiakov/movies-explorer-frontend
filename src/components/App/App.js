@@ -299,6 +299,26 @@ function App() {
         setInfoToolTip(false)
     }
 
+    function handleUpdateProfile({name, email}) {
+
+        setIsLoading(true);
+        mainApi.updateUserInfo({name, email})
+            .then((res) => {
+                setCurrentUser({
+                    name: res.name,
+                    email: res.email
+                });
+                setPopupText('Вы успешно изменили данные!');
+                setInfoToolTip(true);
+            })
+
+            .catch((err) => {
+                setPopupText('Что-то пошло не так! Попробуйте ещё раз.');
+                setInfoToolTip(true);
+            })
+    }
+
+
     return (
         <CurrentUserContext.Provider value={currentUser}>
         <div className="app">
@@ -340,14 +360,14 @@ function App() {
                                      onSubmitCheckbox={handleCheckboxSavedMovies}
                                      preloaderTime={isPreloader}/>
                     </Route>
-                    <Route
-                        path="/profile"
-                        component={ Profile }
-                    />
-                    <Route
-                        path="/404"
-                        component={ NotFound }
-                    />
+                    <Route path="/profile">
+                        <Profile onUpdateProfile={handleUpdateProfile}
+                                 isLoading={isLoading}
+                                 onSignOut={handleSignOut}/>
+                    </Route>
+                    <Route path="/404">
+                        <NotFound />
+                    </Route>
                     <Redirect to="/404" />
                 </Switch>
                 {useRouteMatch(noFooter)

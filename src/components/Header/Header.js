@@ -22,15 +22,14 @@ function Header ({ isLoggedIn }) {
     }, []);
 
     return (
-
         <header className={(window.location.pathname !== '/') ? 'header header_dark' : 'header'}>
-
+<div className="header__container">
             <Link to="/" className="header__logo-link">
                         <img className="header__logo" src={logo} alt="Movies Explorer" />
                 </Link>
                 {isLoggedIn ? <Navigation /> : <PromoNavigation />}
                 {isLoggedIn&&(window.innerWidth<WIDTH_1000) ? <BurgerNavigation /> : null}
-
+</div>
         </header>
 
     );

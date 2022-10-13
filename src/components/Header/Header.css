@@ -1,11 +1,15 @@
 .header {
+    width: 100%;
+    background-color: #073042;
+}
+
+.header__container {
     max-width: 1140px;
     margin: 0 auto;
     display: flex;
     padding: 0 70px;
     justify-content: space-between;
     align-items: center;
-    background-color: #073042;
     height: 74px;
 }
 

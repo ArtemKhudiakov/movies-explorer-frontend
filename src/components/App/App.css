@@ -2,8 +2,9 @@
   font-family: "Inter", "Arial", "Times New Roman";
   margin: 0 auto;
 
+
 }
 .app__container {
-
+  height: 100vh;
   background-color: #202020;
 }
