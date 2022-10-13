@@ -22,6 +22,7 @@ function Form({
             name={name}
             className={`form form-${name}`}
             onSubmit={onSubmit}
+            noValidate
         >
             <div className={`form__body ${name}__header`}>
                 <div className="form__title-container">
@@ -49,7 +50,7 @@ function Form({
                     value={userData.name.value || ""}
                     onChange={onChange}
                     />
-                    <span className={`form__input-error ${inputs[0].name}-input-error`}></span>
+                    <span className={`form__input-error ${inputs[0].name}-input-error`}>{userData.name.errorMessage}</span>
                     </div>
                     )}
 
@@ -67,8 +68,9 @@ function Form({
                         required={inputs[1].required}
                         value={userData.email.value || ""}
                         onChange={onChange}
+                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                     />
-                    <span className={`form__input-error ${inputs[1].name}-input-error`}></span>
+                    <span className={`form__input-error ${inputs[1].name}-input-error`}>{userData.email.errorMessage}</span>
                 </div>
 
                 <div
@@ -86,7 +88,7 @@ function Form({
                         value={userData.password.value || ""}
                         onChange={onChange}
                     />
-                    <span className={`form__input-error ${inputs[2].name}-input-error`}></span>
+                    <span className={`form__input-error ${inputs[2].name}-input-error`}>{userData.password.errorMessage}</span>
                 </div>
             {/*    */}
             </div>

@@ -38,7 +38,7 @@ function SearchForm({onSearch, onSubmitCheckbox}) {
         if (evt.target.value.length === 0) {
             setSearchError({
                 isValid: evt.target.validity.valid,
-                errorMessage: "Введите ключевое слово"
+                errorMessage: "Нужно ввести ключевое слово"
             });
         } else {
             setSearchError({
@@ -56,7 +56,7 @@ function SearchForm({onSearch, onSubmitCheckbox}) {
             console.log(inputValue)
             return setSearchError({
                 isValid: false,
-                errorMessage: "Введите ключевое слово"
+                errorMessage: "Нужно ввести ключевое слово"
             });
         }
 
@@ -72,7 +72,7 @@ function SearchForm({onSearch, onSubmitCheckbox}) {
 
     return (
 
-        <form className="search-form" onSubmit={handleSubmitSearch}>
+        <form className="search__form" onSubmit={handleSubmitSearch} noValidate>
 
             <input
                 type="text"
@@ -87,6 +87,7 @@ function SearchForm({onSearch, onSubmitCheckbox}) {
                 className="search__button"
                 type="submit"
             >Поиск</button>
+            <span className="search__error">{searchError.errorMessage}</span>
             <FilterCheckbox isClicked={clickedCheckbox} onSubmitCheckbox={handleChangeCheckbox}/>
         </form>
 
