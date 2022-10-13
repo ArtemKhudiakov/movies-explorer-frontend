@@ -21,6 +21,7 @@ import mainApi from "../../utils/mainApi";
 import {SHORT_MOVIE, URL_REGEX} from "../../utils/constants";
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 import InfoToolTip from "../InfoToolTip/InfoToolTip";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 function App() {
     const history = useHistory();
@@ -343,28 +344,34 @@ function App() {
                                isLoading={isLoading}/>
                     </Route>
 
-                    <Route path="/movies">
-                        <Movies onSearch={handleSearchMovies}
-                                foundMovies={foundMovies}
-                                onSaveMovie={handleSaveMovie}
-                                onDeleteMovie={handleDeleteMovie}
-                                savedMovies={savedMovies}
-                                onSubmitCheckbox={handleCheckboxMovies}
-                                preloaderTime={isPreloader}/>
-                    </Route>
-                    <Route path="/saved-movies">
-                        <SavedMovies onSearch={handleSearchSavedMovie}
-                                     onSaveMovie={handleSaveMovie}
-                                     onDeleteMovie={handleDeleteMovie}
-                                     savedMovies={savedMovies}
-                                     onSubmitCheckbox={handleCheckboxSavedMovies}
-                                     preloaderTime={isPreloader}/>
-                    </Route>
-                    <Route path="/profile">
-                        <Profile onUpdateProfile={handleUpdateProfile}
-                                 isLoading={isLoading}
-                                 onSignOut={handleSignOut}/>
-                    </Route>
+                    <ProtectedRoute path="/movies"
+                                    isLoggedIn={isLoggedIn}
+                                    component={Movies}
+                                    onSearch={handleSearchMovies}
+                                    foundMovies={foundMovies}
+                                    onSaveMovie={handleSaveMovie}
+                                    onDeleteMovie={handleDeleteMovie}
+                                    savedMovies={savedMovies}
+                                    onSubmitCheckbox={handleCheckboxMovies}
+                                    preloaderTime={isPreloader}
+                    />
+                    <ProtectedRoute path="/saved-movies"
+                                    isLoggedIn={isLoggedIn}
+                                    component={SavedMovies}
+                                    onSearch={handleSearchSavedMovie}
+                                    onSaveMovie={handleSaveMovie}
+                                    onDeleteMovie={handleDeleteMovie}
+                                    savedMovies={savedMovies}
+                                    onSubmitCheckbox={handleCheckboxSavedMovies}
+                                    preloaderTime={isPreloader}
+                    />
+                    <ProtectedRoute path="/profile"
+                                    isLoggedIn={isLoggedIn}
+                                    component={Profile}
+                                    onUpdateProfile={handleUpdateProfile}
+                                    isLoading={isLoading}
+                                    onSignOut={handleSignOut}
+                    />
                     <Route path="/404">
                         <NotFound />
                     </Route>
