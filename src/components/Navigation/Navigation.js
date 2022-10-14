@@ -17,6 +17,7 @@ function Navigation() {
                 </li>
                 <li className="nav__links-item">
                     <NavLink
+                        to="/saved-movies"
                         className="nav__link"
                         activeClassName="nav__link_active"
                     >
