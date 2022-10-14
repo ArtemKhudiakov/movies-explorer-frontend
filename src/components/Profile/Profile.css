@@ -91,6 +91,10 @@
     transition: 0.3s ease-in-out;
 }
 
+.profile__button:disabled {
+    cursor: auto;
+    color: #333b41;
+}
 
 .profile__button:last-child {
     color: #EE3465;

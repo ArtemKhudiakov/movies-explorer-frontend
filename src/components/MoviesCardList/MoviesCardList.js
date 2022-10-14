@@ -7,6 +7,7 @@ import {
     WIDTH_320,
     WIDTH_768,
     WIDTH_1280,
+    WIDTH_1125,
     FULL_CARDS,
     SEARCH_1280,
     SEARCH_768,
@@ -81,7 +82,7 @@ function MoviesCardList({foundMovies, onSaveMovie, onDeleteMovie, savedMovies})
     }
 
     function handleAddButtonClick() {
-        if (deviceWidth >= WIDTH_1280) {setMaxCards(maxCards + ADD_1280);
+        if (deviceWidth >= WIDTH_1125) {setMaxCards(maxCards + ADD_1280);
         } else if (deviceWidth >= WIDTH_768) {setMaxCards(maxCards + ADD_768);
         } else if (deviceWidth >= WIDTH_320) {setMaxCards(maxCards + ADD_320);
         } else {setMaxCards(maxCards + ADD_320);

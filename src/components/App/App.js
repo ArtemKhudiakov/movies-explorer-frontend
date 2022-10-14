@@ -58,7 +58,7 @@ function App() {
         if (isLoggedIn && currentUser) {
             getSavedMovies();
         }
-    }, [isLoggedIn, currentUser]);
+    }, [isLoggedIn, currentUser, savedMovies]);
 
     useEffect(() => {
 
@@ -88,6 +88,10 @@ function App() {
             }
         }
     }, [])
+
+    useEffect(() => {
+        setSavedMovies(savedMovies);
+    }, [savedMovies]);
 
     function handleRegister({name, password, email}) {
 
@@ -171,6 +175,9 @@ function App() {
             const searchMovies = allMovies.filter((item) =>
                 item.nameRU.toLowerCase().includes(movie.toLowerCase()));
 
+            const searchMoviesChecked = allMovies.filter((item) =>
+                item.nameRU.toLowerCase().includes(movie.toLowerCase()) && item.duration <= SHORT_MOVIE );
+
             if (searchMovies.length === 0) {
                 setPopupText('По вашему запросу ничего не найдено');
                 setInfoToolTip(true);
@@ -179,7 +186,11 @@ function App() {
                 localStorage.setItem("searchWord", movie);
                 localStorage.setItem("checkboxStatus", JSON.stringify(checked));
 
-                setFoundMovies(searchMovies);
+                if (!checked) {
+                    setFoundMovies(searchMovies);
+                } else {
+                    setFoundMovies(searchMoviesChecked);
+                }
             }
         } else {
             setIsPreloader(true);
@@ -251,6 +262,21 @@ function App() {
                 const updatedMoviesList = savedMovies.filter((item) => item._id !== movie._id);
                 setSavedMovies(updatedMoviesList);
                 setSavedMoviesList(savedMoviesList.filter((item) => item._id !== movie._id));
+            })
+            .catch((err) => {
+                console.log(`Ошибка ${err}`);
+            });
+    }
+
+    function handleDeleteStartMovie(movie) {
+
+        const deletedFilm = savedMovies.find((item) => item.movieId === movie.id);
+
+        mainApi.deleteMovie(deletedFilm._id)
+            .then(() => {
+                const updatedMoviesList = savedMovies.filter((item) => item._id !== deletedFilm._id);
+                setSavedMovies(updatedMoviesList);
+
             })
             .catch((err) => {
                 console.log(`Ошибка ${err}`);
@@ -335,13 +361,23 @@ function App() {
                     </Route>
 
                     <Route path="/signup">
-                        <Register onRegister={handleRegister}
-                                  isLoading={isLoading}/>
+                        {!isLoggedIn
+                            ? (
+                                <Register onRegister={handleRegister}
+                                          isLoading={isLoading}/>
+                            )
+                            : <Redirect to="/"/>
+                        }
                     </Route>
 
                     <Route path="/signin">
-                        <Login onLogin={handleLogin}
-                               isLoading={isLoading}/>
+                        {!isLoggedIn
+                            ? (
+                                <Login onLogin={handleLogin}
+                                       isLoading={isLoading}/>
+                        )
+                            : <Redirect to="/"/>
+                        }
                     </Route>
 
                     <ProtectedRoute path="/movies"
@@ -350,7 +386,7 @@ function App() {
                                     onSearch={handleSearchMovies}
                                     foundMovies={foundMovies}
                                     onSaveMovie={handleSaveMovie}
-                                    onDeleteMovie={handleDeleteMovie}
+                                    onDeleteMovie={handleDeleteStartMovie}
                                     savedMovies={savedMovies}
                                     onSubmitCheckbox={handleCheckboxMovies}
                                     preloaderTime={isPreloader}

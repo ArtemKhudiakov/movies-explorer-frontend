@@ -38,9 +38,9 @@ function MoviesCard({ movie, onSaveMovie, onDeleteMovie,savedMovies }) {
                         onClick={(window.location.pathname === '/saved-movies') ? (handleDeleteMovie) : (handleSaveMovie)}
                 ></button>
             </div>
-            <div className="movie__container">
+            <a className="movie__container" href={movie.trailerLink} target="blank">
                 <img className="movie__image" src={movie.image.url ? `${BASE_MOVIES_URL}/${movie.image.url}` : movie.image} alt={movie.nameRU} />
-            </div>
+            </a>
 
         </article>
     );
