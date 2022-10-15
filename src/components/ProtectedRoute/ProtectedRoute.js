@@ -1,14 +1,23 @@
-import React from "react";
-import {Route, Redirect} from "react-router-dom";
+import {Route, Redirect} from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
 
 const ProtectedRoute = ({component: Component, ...props}) => {
+
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+
+  useEffect(() => {
+    if (!localStorage.getItem('jwt')) {
+      setIsLoggedIn(false);
+    }
+  }, []);
+
   return (
-    <Route>
-      {() =>
-        props.isLoggedIn ? <Component {...props} /> : <Redirect to="/"/>
-      }
-    </Route>
-  );
-};
+      <Route>
+        {
+          () => isLoggedIn ? <Component {...props} /> : <Redirect to="/"/>
+        }
+      </Route>
+  )
+}
 
 export default ProtectedRoute;

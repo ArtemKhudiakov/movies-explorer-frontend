@@ -54,11 +54,8 @@ function App() {
     const [popupText, setPopupText] = useState('');
 
     useEffect(() => {
-
-        if (isLoggedIn && currentUser) {
             getSavedMovies();
-        }
-    }, [isLoggedIn, currentUser ]);
+    }, [isLoggedIn]);
 
     useEffect(() => {
 
@@ -89,10 +86,10 @@ function App() {
         }
     }, [])
 
-    useEffect(() => {
-        setSavedMovies(savedMovies);
-
-    }, [savedMovies]);
+    // useEffect(() => {
+    //     setSavedMovies(savedMovies);
+    //
+    // }, [savedMovies]);
 
     function handleRegister({name, password, email}) {
 
