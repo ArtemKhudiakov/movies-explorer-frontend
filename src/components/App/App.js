@@ -254,7 +254,7 @@ function App() {
     }
 
     function handleDeleteMovie(movie) {
-        console.log(isLoggedIn)
+
         mainApi.deleteMovie(movie._id)
             .then(() => {
                 const updatedMoviesList = savedMovies.filter((item) => item._id !== movie._id);
