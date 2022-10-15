@@ -25,7 +25,7 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 function App() {
     const history = useHistory();
-    const [isLoggedIn, setIsLoggedIn] = React.useState(true);
+    const [isLoggedIn, setIsLoggedIn] = React.useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [currentUser, setCurrentUser] = useState({
         name: "",
@@ -58,7 +58,7 @@ function App() {
         if (isLoggedIn && currentUser) {
             getSavedMovies();
         }
-    }, [isLoggedIn, currentUser, savedMovies]);
+    }, [isLoggedIn, currentUser ]);
 
     useEffect(() => {
 
@@ -91,6 +91,7 @@ function App() {
 
     useEffect(() => {
         setSavedMovies(savedMovies);
+
     }, [savedMovies]);
 
     function handleRegister({name, password, email}) {
@@ -256,7 +257,7 @@ function App() {
     }
 
     function handleDeleteMovie(movie) {
-
+        console.log(isLoggedIn)
         mainApi.deleteMovie(movie._id)
             .then(() => {
                 const updatedMoviesList = savedMovies.filter((item) => item._id !== movie._id);

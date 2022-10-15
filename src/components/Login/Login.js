@@ -65,8 +65,6 @@ const [userData, setUserData] = useState({
     }, [isValid]);
 
     const handleChange = (evt) => {
-        // console.log(isValid)
-        console.log(isDisabled)
         const { name, value, validity, validationMessage } = evt.target;
 
         setUserData((prevState) => ({
