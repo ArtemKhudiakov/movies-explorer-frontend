@@ -1,0 +1,114 @@
+.movie {
+    background: #222222;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: 364px;
+}
+
+.movie__info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.movie__header {
+    display: inline-block;
+    flex-direction: row;
+    margin: 14px;
+}
+
+.movie__title {
+    color: white;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+    max-width: 214px;
+    padding: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.movie__duration {
+    margin-top: 9px;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 13px;
+    color: #A0A0A0;
+
+}
+
+.movie__container {
+    width: 364px;
+    box-sizing: border-box;
+}
+
+.movie__image {
+    margin: 0;
+    width: 100%;
+    height: 203px;
+    object-fit: fill;
+}
+
+.movie__button {
+    background-image: url(../../images/stroke.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #313131;
+    border: 0;
+    border-radius: 36px;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    margin: 19px 14px;
+}
+
+/*.movie__button:hover {*/
+/*    background-color: #8B8B8B;*/
+/*    opacity: 0.9;*/
+/*    transition: 0.3s ease-in-out;*/
+/*}*/
+
+.movie__button_saved {
+    background-color: #3DDC84;
+}
+
+.movie__button_delete {
+    background-image: url(../../images/delete_card.png);
+    background-color: #313131;
+}
+
+.movie__button_delete:hover {
+    background-color: #8B8B8B;
+    opacity: 0.9;
+    transition: 0.3s ease-in-out;
+}
+
+.movie__container {
+    width: 364px;
+}
+
+@media (min-width: 768px) and (max-width: 1279px) {
+    .movie__container {
+        width: 339px;
+    }
+    .movies {
+        width: calc(100% - 60px);
+
+    }
+}
+
+@media (min-width: 320px) and (max-width: 767px) {
+    .movie__container {
+        width: 300px;
+    }
+
+    .movies {
+        width: calc(100% - 20px);
+
+    }
+}
